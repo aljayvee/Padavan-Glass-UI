@@ -1,0 +1,25 @@
+/* Glassmorphism Override for Padavan */
+body, .wrapper {
+    background: linear-gradient(135deg, #4f6d7a, #c0d6df, #eaeaea) fixed !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.well, .box, .side_nav, .container-fluid {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+}
+
+.btn, .nav-tabs > li > a {
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Mobile-first overrides */
+@media (max-width: 768px) {
+    .span3, .span9, .span10 { width: 100% !important; float: none !important; }
+    iframe { height: auto !important; min-height: 800px; }
+}
