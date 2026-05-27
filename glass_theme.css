@@ -1,21 +1,102 @@
 /* Glassmorphism Override for Padavan */
+
+/* 1. Global Background & Clear Text Color */
 body, .wrapper {
     background: linear-gradient(135deg, #4f6d7a, #c0d6df, #eaeaea) fixed !important;
-    font-family: 'Inter', sans-serif !important;
+    color: #1a202c !important;
+    font-family: 'Inter', 'Segoe UI', sans-serif !important;
 }
 
-.well, .box, .side_nav, .container-fluid {
-    background: rgba(255, 255, 255, 0.15) !important;
+h1, h2, h3, h4, h5, h6, label, p, span, td, th {
+    color: #1a202c !important;
+    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+a {
+    color: #2b6cb0 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+/* 2. Frosted Glass Containers */
+.well, .side_nav, .container-fluid, .navbar-inner {
+    background: rgba(255, 255, 255, 0.25) !important;
     backdrop-filter: blur(15px) !important;
     -webkit-backdrop-filter: blur(15px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
     border-radius: 20px !important;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(31, 38, 135, 0.15) !important;
+}
+.box {
+    background: transparent !important; 
+    box-shadow: none !important; 
+    border: none !important;
 }
 
+/* 3. Buttons & Hover Effects */
 .btn, .nav-tabs > li > a {
     border-radius: 12px !important;
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    color: #2d3748 !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    font-weight: 600 !important;
+}
+
+.btn:hover, .nav-tabs > li > a:hover, .btn-primary:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15) !important;
+    color: #000 !important;
+}
+
+/* 4. Sidebar Matching UI */
+.sidebar-nav ul, .accordion-group, .accordion-heading {
+    border: none !important;
+    background: transparent !important;
+}
+.sidebar-nav ul li a, .accordion-inner a {
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    margin: 4px 8px !important;
+    padding: 8px 15px !important;
+}
+.sidebar-nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
+    transform: translateX(6px);
+}
+.sidebar-nav .active > a {
+    background: rgba(66, 153, 225, 0.2) !important;
+    box-shadow: inset 4px 0 0 #3182ce !important;
+}
+
+/* 5. Modern Logs UI */
+textarea, pre, .syslog {
+    background: rgba(15, 23, 42, 0.85) !important; /* Dark sleek glass */
+    color: #10b981 !important; /* Emerald green text */
+    backdrop-filter: blur(10px) !important;
+    border-radius: 12px !important;
+    padding: 15px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+    font-size: 13px !important;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.3) !important;
+    width: 95% !important;
+}
+
+/* 6. Inputs & Forms */
+input[type="text"], input[type="password"], select {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    border-radius: 8px !important;
+    color: #1a202c !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+}
+input:focus, select:focus {
+    background: rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 0 10px rgba(66, 153, 225, 0.5) !important;
+    outline: none !important;
 }
 
 /* Mobile-first overrides */
