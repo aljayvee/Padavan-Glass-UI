@@ -181,11 +181,14 @@ jobs:
              sed -i 's/CONFIG_FIRMWARE_INCLUDE_RTL_SDR=y/CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n/g' .config
         fi
 
-    - name: Inject Glassmorphism UI
+    - name: Inject Glassmorphism UI & Custom Footer
       run: |
         echo "Injecting Custom UI CSS..."
         cat $GITHUB_WORKSPACE/glass_theme.css >> ${{ env.WORK_DIR }}/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/main.css
         sed -i '/<head>/a <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ${{ env.WORK_DIR }}/trunk/user/www/n56u_ribbon_fixed/index.asp
+        
+        echo "Injecting Custom Developer Footer..."
+        find ${{ env.WORK_DIR }}/trunk/user/www/dict -name "*.dict" -exec sed -i 's/ZVCOPYRVZ/\&#169; 2026 Aljayvee Versola/g' {} +
 
     - name: Compile Firmware
       run: |
