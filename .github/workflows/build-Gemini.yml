@@ -189,6 +189,9 @@ jobs:
         
         echo "Injecting Custom Developer Footer..."
         find ${{ env.WORK_DIR }}/trunk/user/www/dict -name "*.dict" -exec sed -i 's/ZVCOPYRVZ/\&#169; 2026 Aljayvee Versola/g' {} +
+        find ${{ env.WORK_DIR }}/trunk/user/www -name "*.js" -exec sed -i '/Highcharts/d' {} +
+        find ${{ env.WORK_DIR }}/trunk/user/www -name "*.js" -exec sed -i '/Freepik/d' {} +
+        find ${{ env.WORK_DIR }}/trunk/user/www -name "*.js" -exec sed -i '/Non-Commercial/d' {} +
 
     - name: Compile Firmware
       run: |
