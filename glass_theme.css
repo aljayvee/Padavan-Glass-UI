@@ -2,6 +2,7 @@
    TP-Link Archer UI Revamp for Padavan (Signature Teal Edition)
    Inspired by modern TP-Link Archer Dashboards (AX10/AX50/AX90)
    © 2026 Aljayvee Versola
+   v4.0 — All 16 anomaly fixes applied
    ============================================================ */
 
 /* ===========================================
@@ -39,6 +40,17 @@ body.body_iframe {
     background: #9ca3af;
 }
 
+/* [FIX #11] 1d. Global Link Colors — Archer Teal */
+a {
+    color: #00a8cc !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+}
+a:hover {
+    color: #008fae !important;
+    text-decoration: none !important;
+}
+
 /* ===========================================
    PHASE 2: TOP HEADER & BRAND LOGO
    =========================================== */
@@ -52,6 +64,11 @@ body.body_iframe {
     padding: 0 20px !important;
     margin-bottom: 20px !important;
     border-top: 4px solid #00a8cc !important; /* Signature Archer Teal Border Accent */
+}
+
+/* [FIX #15] 2b. Override <center> tag on logo wrapper */
+.span3 center {
+    text-align: left !important;
 }
 
 /* 2b. Router-Centric Logo Text styling */
@@ -151,6 +168,7 @@ body.body_iframe {
     padding: 4px 6px !important;
     font-size: 12px !important;
     color: #5c6270 !important;
+    text-transform: none !important;
 }
 #TopBanner .table-condensed td a {
     color: #00a8cc !important;
@@ -182,7 +200,7 @@ body.body_iframe {
     color: #00a8cc !important;
 }
 
-/* 2f. Circular Minimalist Quick Action Buttons (Reboot, Logout) */
+/* [FIX #3] 2f. Circular Minimalist Quick Action Buttons (Reboot, Logout) */
 #logout_btn, #reboto_btn, #shutdown_btn, #commit_btn {
     background: #f4f5f7 !important;
     border: 1px solid #e9ecf0 !important;
@@ -191,7 +209,7 @@ body.body_iframe {
     width: 28px !important;
     height: 28px !important;
     padding: 0 !important;
-    display: inline-inline-flex !important;
+    display: inline-flex !important; /* FIXED: was inline-inline-flex (invalid) */
     align-items: center !important;
     justify-content: center !important;
     font-size: 12px !important;
@@ -227,7 +245,7 @@ body.body_iframe {
    PHASE 3: SIDEBAR & NAVIGATION MENU
    =========================================== */
 
-/* 3a. Sidebar Wrapper */
+/* [FIX #5] 3a. Sidebar Wrapper — Complete visual properties */
 .side_nav {
     background: #ffffff !important;
     border: 1px solid #e9ecf0 !important;
@@ -235,6 +253,8 @@ body.body_iframe {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
     padding: 12px 0 !important;
     margin-bottom: 20px !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 .side_nav ul, .sidebar-nav ul {
     list-style: none !important;
@@ -292,8 +312,8 @@ body.body_iframe {
    PHASE 4: FLAT CONTENT CARDS & TABLES
    =========================================== */
 
-/* 4a. Pure White Flat Content Cards */
-.well:not(.sidebar-nav):not(.loadingBlock .well):not(#TopBanner .well) {
+/* [FIX #2] 4a. Pure White Flat Content Cards — CSS3-compatible selectors only */
+.well {
     background: #ffffff !important;
     border: 1px solid #e9ecf0 !important;
     border-radius: 8px !important;
@@ -302,6 +322,13 @@ body.body_iframe {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 }
+/* Override: Sidebar keeps its own padding (specificity wins via class combo) */
+.well.side_nav {
+    padding: 12px 0 !important;
+}
+/* Override: Header status boxes need compact padding (specificity wins via ID) */
+/* (Already defined in Phase 2 section above as #TopBanner .well) */
+
 .box:not(.well) {
     background: transparent !important;
     box-shadow: none !important;
@@ -343,7 +370,12 @@ h2.box_head::before {
     border-radius: 0 2px 2px 0 !important;
 }
 
-/* 4c. Data Grid Tables */
+/* [FIX #13] 4c. Content Card Bottom Radius */
+.round_bottom {
+    border-radius: 0 0 8px 8px !important;
+}
+
+/* [FIX #6] 4d. Data Grid Tables — Fixed th styling */
 .table {
     width: 100% !important;
     border-collapse: collapse !important;
@@ -355,18 +387,36 @@ h2.box_head::before {
     line-height: 1.5 !important;
     vertical-align: middle !important;
     border-top: 1px solid #e9ecf0 !important;
-    color: #5c6270 !important;
     text-shadow: none !important;
 }
-.table th, th[style*="background-color"], th {
+.table td {
+    color: #5c6270 !important;
+}
+/* Regular form label th — normal case, readable weight */
+.table th {
     background-color: #fafbfc !important;
     color: #2b303a !important;
-    font-weight: 700 !important;
-    font-size: 12px !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    text-transform: none !important;
     border-bottom: 1px solid #e9ecf0 !important;
     border-top: none !important;
+}
+/* Section divider headers with inline background-color keep normal case */
+th[style*="background-color"] {
+    background-color: #f0f2f5 !important;
+    color: #2b303a !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+/* Data-grid column headers in thead only get uppercase */
+.table thead th {
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
 }
 .table tbody tr:nth-child(even) {
     background-color: #fafbfc !important;
@@ -380,7 +430,22 @@ h2.box_head::before {
    =========================================== */
 
 /* 5a. Form Inputs & Select Menus */
-input[type="text"], input[type="password"], input[type="number"], select, textarea {
+input[type="text"], input[type="password"], input[type="number"], select {
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
+    color: #2b303a !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+}
+/* [FIX #14] Regular textareas — clean white (syslog textarea handled separately) */
+textarea {
     background: #ffffff !important;
     border: 1px solid #d1d5db !important;
     border-radius: 6px !important;
@@ -405,11 +470,17 @@ select option {
     color: #2b303a !important;
 }
 
-/* 5b. General Text/Label Colors */
-span:not(.label):not(.badge):not(.bar):not(.icon-white),
+/* [FIX #7] 5b. Targeted Text/Label Colors — No more broad span selector */
+/* Sidebar and form labels */
 label:not(.label) {
     color: #2b303a !important;
     font-weight: 500 !important;
+    text-shadow: none !important;
+}
+/* Specific UI areas that need dark text */
+.table td span,
+.table th span,
+.container-fluid span:not(.label):not(.badge):not(.bar):not(.icon-white):not(.time) {
     text-shadow: none !important;
 }
 
@@ -510,16 +581,11 @@ label:not(.label) {
     position: relative !important;
 }
 
-/* 6b. Rounded Map Icons */
+/* [FIX #1] 6b. Rounded Map Icons — No background-color override (preserves sprites) */
 .big-icons {
-    background-color: #ffffff !important;
+    /* background-color removed to preserve sprite images from main.css */
     border: 2px solid #e9ecf0 !important;
     border-radius: 50% !important;
-    width: 60px !important;
-    height: 60px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     cursor: pointer !important;
@@ -532,13 +598,13 @@ label:not(.label) {
 .table-big tr.active .big-icons,
 .table-big tr[style*="background"] .big-icons {
     border-color: #00a8cc !important;
-    background: rgba(0, 168, 204, 0.03) !important;
+    /* No background override — sprite must remain visible */
 }
 
-/* Hide standard brown/gray connective arrow images */
-.arrow-right {
-    display: none !important;
-}
+/* [FIX #4] Arrow connectors — REMOVED display:none rule.
+   Arrows are hidden by default in original CSS.
+   JavaScript manages visibility via .show()/.hide().
+   Our !important was defeating JS .show(), breaking visual feedback. */
 
 /* 6c. Map Checkmark Dot Statuses */
 #internetStatus, #wl_securitylevel_span {
@@ -554,13 +620,14 @@ label:not(.label) {
     border: 2px solid #ffffff !important;
 }
 #internetStatus i, #wl_securitylevel_span i {
-    font-size: 8px !important;
+    font-size: 9px !important;
 }
+/* [FIX #12] Client number badge — padding without !important for JS compatibility */
 #clientNumber {
     background: #00a8cc !important;
     color: #ffffff !important;
     border-radius: 10px !important;
-    padding: 1px 6px !important;
+    padding: 1px 6px; /* No !important — JS adjusts padding for digit count */
     font-size: 10px !important;
     font-weight: bold !important;
     border: 2px solid #ffffff !important;
@@ -638,7 +705,7 @@ label:not(.label) {
     color: #00a8cc !important;
 }
 
-/* 7d. Terminal System Log Window */
+/* [FIX #14] 7d. Terminal System Log Window — scoped to specific elements */
 .syslog_panel {
     background: #ffffff !important;
     border: 1px solid #e9ecf0 !important;
@@ -651,7 +718,11 @@ label:not(.label) {
     border: none !important;
     font-weight: bold !important;
 }
-textarea.syslog, pre, .syslog {
+/* Dark terminal styling scoped to syslog elements and script textareas */
+textarea#textarea,
+textarea.syslog,
+pre,
+.syslog {
     background: #1e293b !important;
     color: #38bdf8 !important;
     border: 1px solid #334155 !important;
@@ -684,10 +755,20 @@ textarea.syslog, pre, .syslog {
     background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
 }
 
-/* 7f. Modern Footer Panel */
+/* [FIX #9] 7f. Popup/Loading Overlay Background */
+.popup_bg {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+.popup_bar_bg {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* [FIX #10] 7g. Modern Footer Panel — Full-width */
 #footer {
-    padding: 30px 0 !important;
+    padding: 30px 20px !important;
     margin-top: 40px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
     border-top: 1px solid #e9ecf0 !important;
     color: #8f97a6 !important;
     font-size: 12px !important;
@@ -710,6 +791,14 @@ textarea.syslog, pre, .syslog {
 /* ===========================================
    PHASE 8: RESPONSIVE SCREEN ADAPTABILITY
    =========================================== */
+
+/* [FIX #8] Hide simulated tabs below 1200px (overlap with status buttons) */
+@media (max-width: 1200px) {
+    #TopBanner::after, #TopBanner::before {
+        display: none !important;
+    }
+}
+
 @media (max-width: 768px) {
     .span3, .span9, .span10 {
         width: 100% !important;
@@ -719,8 +808,5 @@ textarea.syslog, pre, .syslog {
     iframe {
         height: auto !important;
         min-height: 800px;
-    }
-    #TopBanner::after, #TopBanner::before {
-        display: none !important; /* Save space on small screens */
     }
 }
