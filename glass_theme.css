@@ -1,68 +1,307 @@
 /* ============================================================
-   Glassmorphism Override for Padavan (v2.0 — All Anomalies Fixed)
+   TP-Link Archer UI Revamp for Padavan (Signature Teal Edition)
+   Inspired by modern TP-Link Archer Dashboards (AX10/AX50/AX90)
    © 2026 Aljayvee Versola
    ============================================================ */
 
 /* ===========================================
-   PHASE 1: CRITICAL — Global + iFrame Styling
+   PHASE 1: GLOBAL LAYOUT & GENERAL STYLING
    =========================================== */
 
-/* 1a. Global Background & Typography */
+/* 1a. Global Page Body & Background */
 body, .wrapper {
-    background: linear-gradient(135deg, #4f6d7a, #c0d6df, #eaeaea) fixed !important;
-    color: #1a202c !important;
-    font-family: 'Inter', 'Segoe UI', sans-serif !important;
+    background: #f4f5f7 !important;
+    color: #3f4756 !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* 1b. iframe Pages — Transparent so parent gradient shows through */
+/* 1b. iframe Pages — Transparent so they sit perfectly on the parent background */
 body.body_iframe {
     background: transparent !important;
     margin: 0 5px !important;
 }
 
+/* 1c. Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f4f5f7;
+}
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
 /* ===========================================
-   PHASE 2: HIGH — Core Visual Fixes
+   PHASE 2: TOP HEADER & BRAND LOGO
    =========================================== */
 
-/* 2a. Clear Text Colors (excluding Bootstrap components) */
-h1, h2, h3, h4, h5, h6, p, td, th {
-    color: #1a202c !important;
-    text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
+/* 2a. Header Wrapper Customization */
+.container-fluid[style*="padding-right: 0px"],
+.container-fluid[style*="padding-right:0px"] {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e9ecf0 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+    padding: 0 20px !important;
+    margin-bottom: 20px !important;
+    border-top: 4px solid #00a8cc !important; /* Signature Archer Teal Border Accent */
 }
 
-/* Keep span/label general but exclude Bootstrap components */
-span:not(.label):not(.badge):not(.bar):not(.icon-white),
-label:not(.label) {
-    color: #1a202c !important;
+/* 2b. Router-Centric Logo Text styling */
+#logo {
+    background: none !important;
+    width: auto !important;
+    height: 60px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    text-align: left !important;
+    margin: 10px 0 0 20px !important;
+    cursor: pointer;
+}
+#logo::before {
+    content: "newifi" !important;
+    color: #00a8cc !important;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    letter-spacing: -1.5px !important;
+    text-transform: lowercase !important;
+    margin-right: 8px !important;
+}
+#logo::after {
+    content: "D2 | Archer Edition" !important;
+    color: #5c6270 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    padding: 2px 8px !important;
+    background: #e9ecf0 !important;
+    border-radius: 4px !important;
+    margin-top: 3px !important;
+    display: inline-block !important;
+    text-shadow: none !important;
 }
 
-a:not(.label):not(.badge) {
-    color: #2b6cb0 !important;
-    text-decoration: none !important;
-    transition: transform 0.2s ease, background-color 0.2s ease !important;
-    will-change: transform;
+/* 2c. Simulated "Basic vs. Advanced" Mode Tabs in Header */
+#TopBanner {
+    margin-top: 5px !important;
+    position: relative !important;
 }
-
-/* 2b. Footer Text — Visible on light background */
-#footer, #footer span, .copyright, #footer div {
-    color: #1a202c !important;
-}
-#footer a {
-    color: #2b6cb0 !important;
-}
-
-/* 2c. Frosted Glass Containers (NO .container-fluid — prevents blur stacking) */
-.well, .side_nav, .navbar-inner {
-    background: rgba(255, 255, 255, 0.3) !important;
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+#TopBanner::after {
+    content: "Basic    Advanced" !important;
+    position: absolute !important;
+    right: 180px !important;
+    top: 10px !important;
+    background: #f4f5f7 !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 12px rgba(31, 38, 135, 0.1) !important;
-    transform: translateZ(0);
+    padding: 4px 6px !important;
+    border: 1px solid #e9ecf0 !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #8f97a6 !important;
+    letter-spacing: 12px !important;
+    text-indent: 12px !important;
+    white-space: pre !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05) !important;
+    cursor: pointer !important;
+}
+/* Sliding active blue capsule selector overlay for simulated tabs */
+#TopBanner::before {
+    content: "Advanced" !important;
+    position: absolute !important;
+    right: 182px !important;
+    top: 13px !important;
+    background: #00a8cc !important;
+    color: #ffffff !important;
+    border-radius: 15px !important;
+    padding: 2px 14px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    z-index: 10 !important;
+    box-shadow: 0 2px 6px rgba(0, 168, 204, 0.3) !important;
 }
 
-/* 2d. .box containers that are NOT also .well — transparent wrapper */
+/* 2d. Modernized Status Capsule Boxes (Header Info) */
+#TopBanner .well {
+    background: #ffffff !important;
+    border: 1px solid #e9ecf0 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    margin-bottom: 8px !important;
+    padding: 8px 12px !important;
+    height: auto !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+#TopBanner .table-condensed td,
+#TopBanner .table-condensed th {
+    border: none !important;
+    padding: 4px 6px !important;
+    font-size: 12px !important;
+    color: #5c6270 !important;
+}
+#TopBanner .table-condensed td a {
+    color: #00a8cc !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+}
+#TopBanner .table-condensed td span {
+    color: #2b303a !important;
+    font-weight: 700 !important;
+}
+
+/* 2e. Wifi Band Toggle Buttons in Header */
+#wifi2_b, #wifi5_b, #wifi2_b_g, #wifi5_b_g {
+    border: 1px solid #e9ecf0 !important;
+    background: #f4f5f7 !important;
+    color: #5c6270 !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    padding: 2px 8px !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    height: 22px !important;
+    transition: all 0.2s ease !important;
+    cursor: pointer !important;
+}
+#wifi2_b.btn-info, #wifi5_b.btn-info, #wifi2_b_g.btn-info, #wifi5_b_g.btn-info {
+    background: rgba(0, 168, 204, 0.1) !important;
+    border-color: rgba(0, 168, 204, 0.3) !important;
+    color: #00a8cc !important;
+}
+
+/* 2f. Circular Minimalist Quick Action Buttons (Reboot, Logout) */
+#logout_btn, #reboto_btn, #shutdown_btn, #commit_btn {
+    background: #f4f5f7 !important;
+    border: 1px solid #e9ecf0 !important;
+    color: #5c6270 !important;
+    border-radius: 50% !important;
+    width: 28px !important;
+    height: 28px !important;
+    padding: 0 !important;
+    display: inline-inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    box-shadow: none !important;
+    transition: all 0.2s ease !important;
+    margin-left: 5px !important;
+    cursor: pointer !important;
+}
+#logout_btn:hover, #reboto_btn:hover, #shutdown_btn:hover {
+    background: #00a8cc !important;
+    border-color: #00a8cc !important;
+    color: #ffffff !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(0, 168, 204, 0.2) !important;
+}
+#commit_btn {
+    border-radius: 14px !important;
+    width: auto !important;
+    padding: 0 12px !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+    color: #b94a48 !important;
+    background: rgba(185, 74, 72, 0.08) !important;
+    border-color: rgba(185, 74, 72, 0.2) !important;
+}
+#commit_btn:hover {
+    background: #b94a48 !important;
+    border-color: #b94a48 !important;
+    color: #ffffff !important;
+}
+
+/* ===========================================
+   PHASE 3: SIDEBAR & NAVIGATION MENU
+   =========================================== */
+
+/* 3a. Sidebar Wrapper */
+.side_nav {
+    background: #ffffff !important;
+    border: 1px solid #e9ecf0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+    padding: 12px 0 !important;
+    margin-bottom: 20px !important;
+}
+.side_nav ul, .sidebar-nav ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* 3b. Sidebar Menu Links */
+.side_nav ul li a,
+.sidebar-nav ul li a {
+    display: block !important;
+    color: #5c6270 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    padding: 10px 20px !important;
+    margin: 2px 0 !important;
+    border-left: 3px solid transparent !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-shadow: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+}
+.side_nav ul li a:hover,
+.sidebar-nav ul li a:hover {
+    background: rgba(0, 168, 204, 0.02) !important;
+    color: #00a8cc !important;
+    border-left-color: rgba(0, 168, 204, 0.3) !important;
+    padding-left: 23px !important;
+}
+
+/* 3c. Signature Active Navigation Highlight */
+.side_nav ul li.active > a,
+.sidebar-nav .active > a,
+.clearfix li.active > a {
+    background: rgba(0, 168, 204, 0.07) !important;
+    color: #00a8cc !important;
+    border-left: 3px solid #00a8cc !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
+    border-radius: 0 !important;
+    padding-left: 23px !important;
+}
+
+/* 3d. Accordion Panels Submenu */
+.accordion-group, .accordion-heading {
+    border: none !important;
+    background: transparent !important;
+}
+.accordion-inner a {
+    padding-left: 35px !important;
+    font-size: 12.5px !important;
+}
+
+/* ===========================================
+   PHASE 4: FLAT CONTENT CARDS & TABLES
+   =========================================== */
+
+/* 4a. Pure White Flat Content Cards */
+.well:not(.sidebar-nav):not(.loadingBlock .well):not(#TopBanner .well) {
+    background: #ffffff !important;
+    border: 1px solid #e9ecf0 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+    padding: 20px !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
 .box:not(.well) {
     background: transparent !important;
     box-shadow: none !important;
@@ -71,300 +310,417 @@ a:not(.label):not(.badge) {
     -webkit-backdrop-filter: none !important;
 }
 
-/* 2e. Loading Overlay — Restore dark modal (overrides .well frosted glass) */
-.loadingBlock .well {
-    background: rgba(33, 33, 33, 0.95) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
-}
-.loadingBlock .well span,
-.loadingBlock .well .bar span,
-#proceeding_main_txt {
-    color: #ffffff !important;
-    text-shadow: none !important;
-}
-
-/* 2f. Popup Overlay Background */
-.popup_bg {
-    background: rgba(0, 0, 0, 0.6) !important;
-}
-
-/* 2g. Page Header Bars — White text on blue glass */
+/* 4b. Card Section Headers */
 .box_head,
 .box.grad_colour_dark_blue h2.box_head,
 h2.box_head {
-    color: #ffffff !important;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
-    background-color: rgba(0, 108, 204, 0.7) !important;
-    background-image: none !important;
-    border-radius: 18px 18px 0 0 !important;
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    border: 1px solid rgba(0, 108, 204, 0.3) !important;
-}
-
-/* 2h. Base Button Styling */
-.btn, .nav-tabs > li > a {
-    border-radius: 12px !important;
-    background: rgba(255, 255, 255, 0.4) !important;
-    color: #2d3748 !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease !important;
-    font-weight: 600 !important;
-    will-change: transform;
-}
-.btn:hover, .nav-tabs > li > a:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.8) !important;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
-    color: #000 !important;
-}
-
-/* 2i. Button Variants — Tinted Glass */
-.btn-primary, .btn-primary:focus {
-    background: rgba(0, 108, 204, 0.4) !important;
-    color: #ffffff !important;
-    border-color: rgba(0, 108, 204, 0.6) !important;
-}
-.btn-primary:hover {
-    background: rgba(0, 108, 204, 0.7) !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 108, 204, 0.3) !important;
-}
-
-.btn-info, .btn-info:focus {
-    background: rgba(58, 135, 173, 0.4) !important;
-    color: #ffffff !important;
-    border-color: rgba(58, 135, 173, 0.6) !important;
-}
-.btn-info:hover {
-    background: rgba(58, 135, 173, 0.7) !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(58, 135, 173, 0.3) !important;
-}
-
-.btn-success, .btn-success:focus {
-    background: rgba(70, 136, 71, 0.4) !important;
-    color: #ffffff !important;
-    border-color: rgba(70, 136, 71, 0.6) !important;
-}
-.btn-success:hover {
-    background: rgba(70, 136, 71, 0.7) !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(70, 136, 71, 0.3) !important;
-}
-
-.btn-warning, .btn-warning:focus {
-    background: rgba(248, 148, 6, 0.4) !important;
-    color: #ffffff !important;
-    border-color: rgba(248, 148, 6, 0.6) !important;
-}
-.btn-warning:hover {
-    background: rgba(248, 148, 6, 0.7) !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-}
-
-.btn-danger, .btn-danger:focus {
-    background: rgba(185, 74, 72, 0.4) !important;
-    color: #ffffff !important;
-    border-color: rgba(185, 74, 72, 0.6) !important;
-}
-.btn-danger:hover {
-    background: rgba(185, 74, 72, 0.7) !important;
-    color: #ffffff !important;
-    transform: translateY(-2px);
-}
-
-/* ===========================================
-   PHASE 3: MEDIUM — Component Compatibility
-   =========================================== */
-
-/* 3a. Bootstrap .label Component — Preserve white text on colored backgrounds */
-span.label, .label {
-    color: #ffffff !important;
-    text-shadow: none !important;
-}
-
-/* 3b. Bootstrap .badge Component — Preserve white text */
-.badge, .badge span, .badge i {
-    color: #ffffff !important;
-    text-shadow: none !important;
-}
-
-/* 3c. Syslog Panel — Glassmorphic */
-.syslog_panel {
-    background: rgba(255, 255, 255, 0.3) !important;
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.4) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-}
-#syslog_panel_button {
-    background: rgba(255, 255, 255, 0.4) !important;
-    border-radius: 8px !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    transition: background-color 0.2s ease !important;
-}
-#syslog_panel_button:hover {
-    background: rgba(255, 255, 255, 0.7) !important;
-}
-
-/* 3d. Active Sidebar Menu — Unified active state */
-.side_nav ul li.active > a,
-.sidebar-nav .active > a,
-.clearfix li.active > a {
-    color: #ffffff !important;
-    text-shadow: none !important;
-    background: rgba(66, 153, 225, 0.4) !important;
-    border-radius: 10px !important;
-}
-
-/* 3e. Sidebar Styling */
-.sidebar-nav ul, .accordion-group, .accordion-heading {
-    border: none !important;
-    background: transparent !important;
-}
-.sidebar-nav ul li a, .accordion-inner a,
-.side_nav ul li a {
+    background: #ffffff !important;
+    color: #2b303a !important;
+    font-size: 16px !important;
     font-weight: 700 !important;
-    border-radius: 10px !important;
-    margin: 4px 8px !important;
-    padding: 8px 15px !important;
-    transition: transform 0.2s ease, background-color 0.2s ease !important;
-}
-.sidebar-nav ul li a:hover,
-.side_nav ul li a:hover {
-    background: rgba(255, 255, 255, 0.5) !important;
-    transform: translateX(4px);
-    color: #1a202c !important;
-}
-
-/* ===========================================
-   PHASE 4: LOW — Cosmetic Polish
-   =========================================== */
-
-/* 4a. Alert Components */
-.alert {
-    border-radius: 10px !important;
-    backdrop-filter: blur(3px) !important;
-    -webkit-backdrop-filter: blur(3px) !important;
-}
-.alert-info {
-    background: rgba(217, 237, 247, 0.5) !important;
-    border: 1px solid rgba(188, 232, 241, 0.6) !important;
-    color: #2b6cb0 !important;
-}
-.alert-error, .alert-danger {
-    background: rgba(242, 222, 222, 0.5) !important;
-    border: 1px solid rgba(238, 211, 215, 0.6) !important;
-    color: #b94a48 !important;
-}
-
-/* 4b. Tab Padding */
-.nav-tabs > li > a {
-    padding: 6px 12px !important;
-}
-.nav-tabs > .active > a {
-    background: rgba(255, 255, 255, 0.6) !important;
-    border-bottom-color: transparent !important;
-}
-
-/* 4c. Progress Bars */
-.progress {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-radius: 10px !important;
-    overflow: hidden !important;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
-}
-.bar {
-    border-radius: 10px !important;
-}
-
-/* 4d. Modern Logs UI (No Blur for Performance) */
-textarea, pre, .syslog {
-    background: rgba(15, 23, 42, 0.95) !important;
-    color: #10b981 !important;
-    border-radius: 12px !important;
-    padding: 15px !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    font-family: 'Consolas', 'Courier New', monospace !important;
-    font-size: 13px !important;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2) !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
+    text-shadow: none !important;
+    border: none !important;
+    border-bottom: 1px solid #e9ecf0 !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 12px 20px !important;
+    margin: 0 0 15px 0 !important;
+    position: relative !important;
+    display: block !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 }
-
-/* 4e. Inputs & Forms */
-input[type="text"], input[type="password"], input[type="number"], select {
-    background: rgba(255, 255, 255, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.8) !important;
-    border-radius: 8px !important;
-    color: #1a202c !important;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease !important;
-    font-weight: 500 !important;
-}
-input:focus, select:focus {
-    background: rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 0 8px rgba(66, 153, 225, 0.4) !important;
-    outline: none !important;
+/* Left accent block on section header */
+.box_head::before,
+.box.grad_colour_dark_blue h2.box_head::before,
+h2.box_head::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 15px !important;
+    height: 16px !important;
+    width: 4px !important;
+    background: #00a8cc !important;
+    border-radius: 0 2px 2px 0 !important;
 }
 
-/* 4f. Select Dropdown Options — Solid background for readability */
-select option {
+/* 4c. Data Grid Tables */
+.table {
+    width: 100% !important;
+    border-collapse: collapse !important;
     background: #ffffff !important;
-    color: #1a202c !important;
+    margin-bottom: 15px !important;
 }
-
-/* 4g. Button Input Types */
-input[type="button"] {
-    border-radius: 12px !important;
-    transition: transform 0.2s ease, background-color 0.2s ease !important;
-    will-change: transform;
+.table th, .table td {
+    padding: 10px 12px !important;
+    line-height: 1.5 !important;
+    vertical-align: middle !important;
+    border-top: 1px solid #e9ecf0 !important;
+    color: #5c6270 !important;
+    text-shadow: none !important;
 }
-
-/* 4h. Popover & Tooltip Styling */
-.popover {
-    background: rgba(255, 255, 255, 0.85) !important;
-    backdrop-filter: blur(5px) !important;
-    -webkit-backdrop-filter: blur(5px) !important;
-    border-radius: 12px !important;
-    border: 1px solid rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+.table th, th[style*="background-color"], th {
+    background-color: #fafbfc !important;
+    color: #2b303a !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    border-bottom: 1px solid #e9ecf0 !important;
+    border-top: none !important;
 }
-.popover-title {
-    background: rgba(255, 255, 255, 0.3) !important;
-    border-radius: 12px 12px 0 0 !important;
+.table tbody tr:nth-child(even) {
+    background-color: #fafbfc !important;
 }
-.tooltip-inner {
-    background: rgba(15, 23, 42, 0.9) !important;
-    border-radius: 8px !important;
-}
-.tooltip.top .tooltip-arrow {
-    border-top-color: rgba(15, 23, 42, 0.9) !important;
-}
-.tooltip.bottom .tooltip-arrow {
-    border-bottom-color: rgba(15, 23, 42, 0.9) !important;
-}
-
-/* 4i. Section Divider Backgrounds (inline style overrides) */
-th[style*="background-color"] {
-    background-color: rgba(255, 255, 255, 0.2) !important;
-    border-radius: 6px !important;
+.table tbody tr:hover {
+    background-color: rgba(0, 168, 204, 0.02) !important;
 }
 
 /* ===========================================
-   RESPONSIVE — Mobile Overrides
+   PHASE 5: FORM CONTROLS & MODERN SLIDERS
+   =========================================== */
+
+/* 5a. Form Inputs & Select Menus */
+input[type="text"], input[type="password"], input[type="number"], select, textarea {
+    background: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
+    color: #2b303a !important;
+    font-family: inherit !important;
+    font-size: 13px !important;
+    padding: 6px 10px !important;
+    height: auto !important;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #00a8cc !important;
+    box-shadow: 0 0 0 3px rgba(0, 168, 204, 0.15) !important;
+    outline: none !important;
+    background: #ffffff !important;
+}
+select option {
+    background: #ffffff !important;
+    color: #2b303a !important;
+}
+
+/* 5b. General Text/Label Colors */
+span:not(.label):not(.badge):not(.bar):not(.icon-white),
+label:not(.label) {
+    color: #2b303a !important;
+    font-weight: 500 !important;
+    text-shadow: none !important;
+}
+
+/* 5c. Action Buttons */
+.btn, input[type="button"] {
+    background: #ffffff !important;
+    color: #5c6270 !important;
+    border: 1px solid #d1d5db !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    padding: 6px 16px !important;
+    transition: all 0.2s ease !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    cursor: pointer !important;
+}
+.btn:hover, input[type="button"]:hover {
+    background: #f4f5f7 !important;
+    color: #2b303a !important;
+    border-color: #c1c5cd !important;
+}
+/* Primary solid teal button */
+.btn-primary {
+    background: #00a8cc !important;
+    border-color: #00a8cc !important;
+    color: #ffffff !important;
+}
+.btn-primary:hover {
+    background: #008fae !important;
+    border-color: #008fae !important;
+    color: #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 168, 204, 0.2) !important;
+}
+/* Outlined Secondary Variant */
+.btn-info {
+    background: rgba(0, 168, 204, 0.08) !important;
+    border-color: rgba(0, 168, 204, 0.2) !important;
+    color: #00a8cc !important;
+}
+.btn-info:hover {
+    background: #00a8cc !important;
+    border-color: #00a8cc !important;
+    color: #ffffff !important;
+}
+.btn-success {
+    background: rgba(46, 204, 113, 0.08) !important;
+    border-color: rgba(46, 204, 113, 0.2) !important;
+    color: #2ecc71 !important;
+}
+.btn-success:hover {
+    background: #2ecc71 !important;
+    border-color: #2ecc71 !important;
+    color: #ffffff !important;
+}
+.btn-danger {
+    background: rgba(231, 76, 60, 0.08) !important;
+    border-color: rgba(231, 76, 60, 0.2) !important;
+    color: #e74c3c !important;
+}
+.btn-danger:hover {
+    background: #e74c3c !important;
+    border-color: #e74c3c !important;
+    color: #ffffff !important;
+}
+
+/* 5d. Modern Slider Toggle Switches (iToggle) */
+.itoggle, .iToggle, .iToggle-wrapper {
+    border-radius: 12px !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.itoggle-on, .iToggle-on {
+    background-color: #00a8cc !important;
+    background-image: none !important;
+    border-radius: 12px 0 0 12px !important;
+}
+.itoggle-off, .iToggle-off {
+    background-color: #cbd5e1 !important;
+    background-image: none !important;
+    border-radius: 0 12px 12px 0 !important;
+}
+.itoggle-button, .iToggle-button {
+    background: #ffffff !important;
+    border-radius: 50% !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+    border: none !important;
+}
+
+/* ===========================================
+   PHASE 6: INTERACTIVE NETWORK MAP
+   =========================================== */
+
+/* 6a. Map Element Alignment */
+.table-big td {
+    padding: 15px 10px !important;
+    text-align: center !important;
+    position: relative !important;
+}
+
+/* 6b. Rounded Map Icons */
+.big-icons {
+    background-color: #ffffff !important;
+    border: 2px solid #e9ecf0 !important;
+    border-radius: 50% !important;
+    width: 60px !important;
+    height: 60px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    cursor: pointer !important;
+}
+.big-icons:hover {
+    border-color: #00a8cc !important;
+    box-shadow: 0 6px 16px rgba(0, 168, 204, 0.15) !important;
+    transform: scale(1.05) !important;
+}
+.table-big tr.active .big-icons,
+.table-big tr[style*="background"] .big-icons {
+    border-color: #00a8cc !important;
+    background: rgba(0, 168, 204, 0.03) !important;
+}
+
+/* Hide standard brown/gray connective arrow images */
+.arrow-right {
+    display: none !important;
+}
+
+/* 6c. Map Checkmark Dot Statuses */
+#internetStatus, #wl_securitylevel_span {
+    background: #2ecc71 !important; /* Visual Green Active Indicator */
+    border-radius: 50% !important;
+    width: 18px !important;
+    height: 18px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+}
+#internetStatus i, #wl_securitylevel_span i {
+    font-size: 8px !important;
+}
+#clientNumber {
+    background: #00a8cc !important;
+    color: #ffffff !important;
+    border-radius: 10px !important;
+    padding: 1px 6px !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    border: 2px solid #ffffff !important;
+}
+
+/* ===========================================
+   PHASE 7: DIALOGS, ALERTS, LOGS & FOOTER
+   =========================================== */
+
+/* 7a. Notification Alerts */
+.alert {
+    border-radius: 6px !important;
+    padding: 10px 15px !important;
+    font-size: 13px !important;
+    border: 1px solid transparent !important;
+    text-shadow: none !important;
+}
+.alert-info {
+    background-color: rgba(0, 168, 204, 0.08) !important;
+    border-color: rgba(0, 168, 204, 0.15) !important;
+    color: #00a8cc !important;
+}
+.alert-danger, .alert-error {
+    background-color: rgba(231, 76, 60, 0.08) !important;
+    border-color: rgba(231, 76, 60, 0.15) !important;
+    color: #e74c3c !important;
+}
+.alert-success {
+    background-color: rgba(46, 204, 113, 0.08) !important;
+    border-color: rgba(46, 204, 113, 0.15) !important;
+    color: #2ecc71 !important;
+}
+
+/* 7b. Badges and Labels */
+.badge, .label {
+    border-radius: 4px !important;
+    font-weight: 600 !important;
+    font-size: 11px !important;
+    padding: 2px 6px !important;
+    text-shadow: none !important;
+}
+.label-info, .badge-info { background-color: #00a8cc !important; }
+.label-success, .badge-success { background-color: #2ecc71 !important; }
+.label-warning, .badge-warning { background-color: #f1c40f !important; }
+.label-important, .badge-important, .label-danger { background-color: #e74c3c !important; }
+
+/* 7c. Tab Control Layouts */
+.nav-tabs {
+    border-bottom: 1px solid #e9ecf0 !important;
+    margin-bottom: 20px !important;
+}
+.nav-tabs > li {
+    margin-bottom: -1px !important;
+}
+.nav-tabs > li > a {
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-radius: 4px 4px 0 0 !important;
+    color: #5c6270 !important;
+    font-weight: 600 !important;
+    margin-right: 4px !important;
+    padding: 8px 16px !important;
+}
+.nav-tabs > li > a:hover {
+    background: #e9ecf0 !important;
+    color: #2b303a !important;
+    border-color: #e9ecf0 #e9ecf0 transparent !important;
+}
+.nav-tabs > .active > a,
+.nav-tabs > .active > a:hover,
+.nav-tabs > .active > a:focus {
+    background: #ffffff !important;
+    border: 1px solid #e9ecf0 !important;
+    border-bottom-color: transparent !important;
+    color: #00a8cc !important;
+}
+
+/* 7d. Terminal System Log Window */
+.syslog_panel {
+    background: #ffffff !important;
+    border: 1px solid #e9ecf0 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05) !important;
+    border-radius: 12px !important;
+}
+#syslog_panel_button {
+    background: #00a8cc !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: bold !important;
+}
+textarea.syslog, pre, .syslog {
+    background: #1e293b !important;
+    color: #38bdf8 !important;
+    border: 1px solid #334155 !important;
+    font-family: 'Consolas', 'Courier New', monospace !important;
+    font-size: 12.5px !important;
+    border-radius: 6px !important;
+    padding: 12px !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 7e. Reliable Reboot & Processing Modal Overlay */
+.loadingBlock .well {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+    padding: 30px !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+.loadingBlock .well span {
+    color: #f8fafc !important;
+    text-shadow: none !important;
+    font-weight: 600 !important;
+}
+.progress-striped .bar {
+    background-color: #00a8cc !important;
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+}
+
+/* 7f. Modern Footer Panel */
+#footer {
+    padding: 30px 0 !important;
+    margin-top: 40px !important;
+    border-top: 1px solid #e9ecf0 !important;
+    color: #8f97a6 !important;
+    font-size: 12px !important;
+    background: #ffffff !important;
+}
+#footer a {
+    color: #00a8cc !important;
+    font-weight: 600 !important;
+    text-decoration: none;
+}
+#footer span {
+    color: #8f97a6 !important;
+}
+.copyright {
+    font-weight: 700 !important;
+    color: #5c6270 !important;
+    margin-bottom: 8px !important;
+}
+
+/* ===========================================
+   PHASE 8: RESPONSIVE SCREEN ADAPTABILITY
    =========================================== */
 @media (max-width: 768px) {
-    .span3, .span9, .span10 { width: 100% !important; float: none !important; }
-    iframe { height: auto !important; min-height: 800px; }
+    .span3, .span9, .span10 {
+        width: 100% !important;
+        float: none !important;
+        margin-left: 0 !important;
+    }
+    iframe {
+        height: auto !important;
+        min-height: 800px;
+    }
+    #TopBanner::after, #TopBanner::before {
+        display: none !important; /* Save space on small screens */
+    }
 }
