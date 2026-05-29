@@ -184,9 +184,16 @@ jobs:
 
     - name: Inject Glassmorphism UI & Custom Footer
       run: |
+        MAIN_CSS="${{ env.WORK_DIR }}/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/main.css"
+        
+        echo "Cleaning corrupted CSS from source main.css..."
+        sed -i '/Glassmorphism/d' "$MAIN_CSS"
+        
         echo "Injecting Custom UI CSS..."
-        cat $GITHUB_WORKSPACE/glass_theme.css >> ${{ env.WORK_DIR }}/trunk/user/www/n56u_ribbon_fixed/bootstrap/css/main.css
-        sed -i '/<head>/a <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' ${{ env.WORK_DIR }}/trunk/user/www/n56u_ribbon_fixed/index.asp
+        cat $GITHUB_WORKSPACE/glass_theme.css >> "$MAIN_CSS"
+        
+        echo "Injecting viewport meta into all ASP pages..."
+        find ${{ env.WORK_DIR }}/trunk/user/www/n56u_ribbon_fixed -name "*.asp" -exec sed -i '/<head>/a <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">' {} +
         
         echo "Injecting Custom Developer Footer..."
         find ${{ env.WORK_DIR }}/trunk/user/www/dict -name "*.dict" -exec sed -i 's/ZVCOPYRVZ/\&#169; 2026 Aljayvee Versola/g' {} +

@@ -1,44 +1,111 @@
-/* Glassmorphism Override for Padavan (Performance Optimized) */
+/* ============================================================
+   Glassmorphism Override for Padavan (v2.0 — All Anomalies Fixed)
+   © 2026 Aljayvee Versola
+   ============================================================ */
 
-/* 1. Global Background & Clear Text Color */
+/* ===========================================
+   PHASE 1: CRITICAL — Global + iFrame Styling
+   =========================================== */
+
+/* 1a. Global Background & Typography */
 body, .wrapper {
     background: linear-gradient(135deg, #4f6d7a, #c0d6df, #eaeaea) fixed !important;
     color: #1a202c !important;
     font-family: 'Inter', 'Segoe UI', sans-serif !important;
 }
 
-h1, h2, h3, h4, h5, h6, label, p, span, td, th {
+/* 1b. iframe Pages — Transparent so parent gradient shows through */
+body.body_iframe {
+    background: transparent !important;
+    margin: 0 5px !important;
+}
+
+/* ===========================================
+   PHASE 2: HIGH — Core Visual Fixes
+   =========================================== */
+
+/* 2a. Clear Text Colors (excluding Bootstrap components) */
+h1, h2, h3, h4, h5, h6, p, td, th {
     color: #1a202c !important;
     text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.4);
 }
 
-a {
+/* Keep span/label general but exclude Bootstrap components */
+span:not(.label):not(.badge):not(.bar):not(.icon-white),
+label:not(.label) {
+    color: #1a202c !important;
+}
+
+a:not(.label):not(.badge) {
     color: #2b6cb0 !important;
     text-decoration: none !important;
     transition: transform 0.2s ease, background-color 0.2s ease !important;
     will-change: transform;
 }
 
-/* 2. Frosted Glass Containers (Optimized Blur) */
-.well, .side_nav, .container-fluid, .navbar-inner {
+/* 2b. Footer Text — Visible on light background */
+#footer, #footer span, .copyright, #footer div {
+    color: #1a202c !important;
+}
+#footer a {
+    color: #2b6cb0 !important;
+}
+
+/* 2c. Frosted Glass Containers (NO .container-fluid — prevents blur stacking) */
+.well, .side_nav, .navbar-inner {
     background: rgba(255, 255, 255, 0.3) !important;
-    /* Reduced blur for massive performance gain */
     backdrop-filter: blur(5px) !important;
     -webkit-backdrop-filter: blur(5px) !important;
     border: 1px solid rgba(255, 255, 255, 0.4) !important;
     border-radius: 20px !important;
-    box-shadow: 0 4px 12px rgba(31, 38, 135, 0.1) !important; /* Simplified shadow */
-    transform: translateZ(0); /* Hardware Acceleration */
+    box-shadow: 0 4px 12px rgba(31, 38, 135, 0.1) !important;
+    transform: translateZ(0);
 }
-.box {
-    background: transparent !important; 
-    box-shadow: none !important; 
+
+/* 2d. .box containers that are NOT also .well — transparent wrapper */
+.box:not(.well) {
+    background: transparent !important;
+    box-shadow: none !important;
     border: none !important;
-    backdrop-filter: none !important; /* Prevent double-blur lag */
+    backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 }
 
-/* 3. Buttons & Hover Effects */
+/* 2e. Loading Overlay — Restore dark modal (overrides .well frosted glass) */
+.loadingBlock .well {
+    background: rgba(33, 33, 33, 0.95) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+.loadingBlock .well span,
+.loadingBlock .well .bar span,
+#proceeding_main_txt {
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+/* 2f. Popup Overlay Background */
+.popup_bg {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* 2g. Page Header Bars — White text on blue glass */
+.box_head,
+.box.grad_colour_dark_blue h2.box_head,
+h2.box_head {
+    color: #ffffff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+    background-color: rgba(0, 108, 204, 0.7) !important;
+    background-image: none !important;
+    border-radius: 18px 18px 0 0 !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(0, 108, 204, 0.3) !important;
+}
+
+/* 2h. Base Button Styling */
 .btn, .nav-tabs > li > a {
     border-radius: 12px !important;
     background: rgba(255, 255, 255, 0.4) !important;
@@ -48,50 +115,196 @@ a {
     font-weight: 600 !important;
     will-change: transform;
 }
-
-.btn:hover, .nav-tabs > li > a:hover, .btn-primary:hover {
+.btn:hover, .nav-tabs > li > a:hover {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.8) !important;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
     color: #000 !important;
 }
 
-/* 4. Sidebar Matching UI */
+/* 2i. Button Variants — Tinted Glass */
+.btn-primary, .btn-primary:focus {
+    background: rgba(0, 108, 204, 0.4) !important;
+    color: #ffffff !important;
+    border-color: rgba(0, 108, 204, 0.6) !important;
+}
+.btn-primary:hover {
+    background: rgba(0, 108, 204, 0.7) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 108, 204, 0.3) !important;
+}
+
+.btn-info, .btn-info:focus {
+    background: rgba(58, 135, 173, 0.4) !important;
+    color: #ffffff !important;
+    border-color: rgba(58, 135, 173, 0.6) !important;
+}
+.btn-info:hover {
+    background: rgba(58, 135, 173, 0.7) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(58, 135, 173, 0.3) !important;
+}
+
+.btn-success, .btn-success:focus {
+    background: rgba(70, 136, 71, 0.4) !important;
+    color: #ffffff !important;
+    border-color: rgba(70, 136, 71, 0.6) !important;
+}
+.btn-success:hover {
+    background: rgba(70, 136, 71, 0.7) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(70, 136, 71, 0.3) !important;
+}
+
+.btn-warning, .btn-warning:focus {
+    background: rgba(248, 148, 6, 0.4) !important;
+    color: #ffffff !important;
+    border-color: rgba(248, 148, 6, 0.6) !important;
+}
+.btn-warning:hover {
+    background: rgba(248, 148, 6, 0.7) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+.btn-danger, .btn-danger:focus {
+    background: rgba(185, 74, 72, 0.4) !important;
+    color: #ffffff !important;
+    border-color: rgba(185, 74, 72, 0.6) !important;
+}
+.btn-danger:hover {
+    background: rgba(185, 74, 72, 0.7) !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+/* ===========================================
+   PHASE 3: MEDIUM — Component Compatibility
+   =========================================== */
+
+/* 3a. Bootstrap .label Component — Preserve white text on colored backgrounds */
+span.label, .label {
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+/* 3b. Bootstrap .badge Component — Preserve white text */
+.badge, .badge span, .badge i {
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+/* 3c. Syslog Panel — Glassmorphic */
+.syslog_panel {
+    background: rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+#syslog_panel_button {
+    background: rgba(255, 255, 255, 0.4) !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    transition: background-color 0.2s ease !important;
+}
+#syslog_panel_button:hover {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* 3d. Active Sidebar Menu — Unified active state */
+.side_nav ul li.active > a,
+.sidebar-nav .active > a,
+.clearfix li.active > a {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    background: rgba(66, 153, 225, 0.4) !important;
+    border-radius: 10px !important;
+}
+
+/* 3e. Sidebar Styling */
 .sidebar-nav ul, .accordion-group, .accordion-heading {
     border: none !important;
     background: transparent !important;
 }
-.sidebar-nav ul li a, .accordion-inner a {
+.sidebar-nav ul li a, .accordion-inner a,
+.side_nav ul li a {
     font-weight: 700 !important;
     border-radius: 10px !important;
     margin: 4px 8px !important;
     padding: 8px 15px !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
 }
-.sidebar-nav ul li a:hover {
-    background: rgba(255, 255, 255, 0.6) !important;
+.sidebar-nav ul li a:hover,
+.side_nav ul li a:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
     transform: translateX(4px);
-}
-.sidebar-nav .active > a {
-    background: rgba(66, 153, 225, 0.3) !important;
+    color: #1a202c !important;
 }
 
-/* 5. Modern Logs UI (No Blur for Performance) */
+/* ===========================================
+   PHASE 4: LOW — Cosmetic Polish
+   =========================================== */
+
+/* 4a. Alert Components */
+.alert {
+    border-radius: 10px !important;
+    backdrop-filter: blur(3px) !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+}
+.alert-info {
+    background: rgba(217, 237, 247, 0.5) !important;
+    border: 1px solid rgba(188, 232, 241, 0.6) !important;
+    color: #2b6cb0 !important;
+}
+.alert-error, .alert-danger {
+    background: rgba(242, 222, 222, 0.5) !important;
+    border: 1px solid rgba(238, 211, 215, 0.6) !important;
+    color: #b94a48 !important;
+}
+
+/* 4b. Tab Padding */
+.nav-tabs > li > a {
+    padding: 6px 12px !important;
+}
+.nav-tabs > .active > a {
+    background: rgba(255, 255, 255, 0.6) !important;
+    border-bottom-color: transparent !important;
+}
+
+/* 4c. Progress Bars */
+.progress {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+.bar {
+    border-radius: 10px !important;
+}
+
+/* 4d. Modern Logs UI (No Blur for Performance) */
 textarea, pre, .syslog {
-    background: rgba(15, 23, 42, 0.95) !important; /* Solid dark color instead of blur */
-    color: #10b981 !important; /* Emerald green text */
+    background: rgba(15, 23, 42, 0.95) !important;
+    color: #10b981 !important;
     border-radius: 12px !important;
     padding: 15px !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     font-family: 'Consolas', 'Courier New', monospace !important;
     font-size: 13px !important;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.2) !important;
-    width: 95% !important;
-    backdrop-filter: none !important; /* Huge performance save on scrolling logs */
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
 }
 
-/* 6. Inputs & Forms */
-input[type="text"], input[type="password"], select {
+/* 4e. Inputs & Forms */
+input[type="text"], input[type="password"], input[type="number"], select {
     background: rgba(255, 255, 255, 0.6) !important;
     border: 1px solid rgba(255, 255, 255, 0.8) !important;
     border-radius: 8px !important;
@@ -105,7 +318,52 @@ input:focus, select:focus {
     outline: none !important;
 }
 
-/* Mobile-first overrides */
+/* 4f. Select Dropdown Options — Solid background for readability */
+select option {
+    background: #ffffff !important;
+    color: #1a202c !important;
+}
+
+/* 4g. Button Input Types */
+input[type="button"] {
+    border-radius: 12px !important;
+    transition: transform 0.2s ease, background-color 0.2s ease !important;
+    will-change: transform;
+}
+
+/* 4h. Popover & Tooltip Styling */
+.popover {
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(5px) !important;
+    -webkit-backdrop-filter: blur(5px) !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+.popover-title {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+.tooltip-inner {
+    background: rgba(15, 23, 42, 0.9) !important;
+    border-radius: 8px !important;
+}
+.tooltip.top .tooltip-arrow {
+    border-top-color: rgba(15, 23, 42, 0.9) !important;
+}
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: rgba(15, 23, 42, 0.9) !important;
+}
+
+/* 4i. Section Divider Backgrounds (inline style overrides) */
+th[style*="background-color"] {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 6px !important;
+}
+
+/* ===========================================
+   RESPONSIVE — Mobile Overrides
+   =========================================== */
 @media (max-width: 768px) {
     .span3, .span9, .span10 { width: 100% !important; float: none !important; }
     iframe { height: auto !important; min-height: 800px; }
